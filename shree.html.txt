@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Completion Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .task {
+      text-align: left;
+      margin: 15px 0;
+      padding: 10px;
+      background: #f9fafb;
+      border-left: 5px solid #3b82f6;
+      border-radius: 5px;
+    }
+    .task input {
+      margin-right: 10px;
+    }
+    #submitBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+    #submitBtn:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Complete These Tasks</h2>
+    <div class="task">
+      <label><input type="checkbox" class="taskCheck" data-task="Followed on social media" /> Go and follow us</label>
+    </div>
+    <div class="task">
+      <label><input type="checkbox" class="taskCheck" data-task="Reel created" /> Make a reel for our product</label>
+    </div>
+    <div class="task">
+      <label><input type="checkbox" class="taskCheck" data-task="Gift collected and visited store" /> Collect your gift and visit the store</label>
+    </div>
+    <button id="submitBtn" onclick="submitTasks()">Submit to Admin</button>
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('.taskCheck');
+    const submitBtn = document.getElementById('submitBtn');
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const allChecked = [...checkboxes].every(c => c.checked);
+        submitBtn.style.display = allChecked ? 'inline-block' : 'none';
+      });
+    });
+
+    function submitTasks() {
+      const completedTasks = [...checkboxes].map(cb => cb.dataset.task);
+      
+      // Simulated submission (you can replace this with actual backend/API call)
+      console.log("Data sent to admin:", completedTasks);
+
+      alert("Thanks! Your tasks have been submitted to the admin.");
+      
+      // Optionally disable further interaction
+      checkboxes.forEach(cb => cb.disabled = true);
+      submitBtn.disabled = true;
+    }
+  </script>
+</body>
+</html>
